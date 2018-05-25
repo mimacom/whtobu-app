@@ -1,0 +1,11 @@
+#image-taken-screen {
+  background-color: yellow;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-orign: center;
+  background-attachment: fixed;
+}
+
+#image-taken-screen.icon-tap {
+  background-image: url('~/assets/tap.png');
+}

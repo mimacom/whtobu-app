@@ -2,8 +2,10 @@ import {NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
 import {NativeScriptModule} from "nativescript-angular/nativescript.module";
 import {AppRoutingModule} from "./app.routing";
 import {AppComponent} from "./app.component";
-
-import {CameraComponent} from "~/camera/camera.component";
+import {CameraComponent} from "~/prediction/camera/camera.component";
+import {ResultComponent} from "~/prediction/result/result.component";
+import {PredictionComponent} from "~/prediction/prediction.component";
+import {PredictionDataShareService} from "~/prediction/prediction-data-share.service";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -21,9 +23,12 @@ import {CameraComponent} from "~/camera/camera.component";
     ],
     declarations: [
         AppComponent,
-        CameraComponent
+        CameraComponent,
+        ResultComponent,
+        PredictionComponent
     ],
     providers: [
+        PredictionDataShareService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
