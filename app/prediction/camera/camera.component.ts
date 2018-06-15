@@ -4,6 +4,8 @@ import {ImageAsset} from "image-asset";
 import {takePicture} from "nativescript-camera";
 import {Router} from "@angular/router";
 import {PredictionDataShareService} from "~/prediction/prediction-data-share.service";
+import {RecognitionService} from "~/recognition.service";
+import * as ImageSourceModule from "tns-core-modules/image-source";
 
 @Component({
     moduleId: module.id,
@@ -18,7 +20,8 @@ export class CameraComponent {
 
     constructor(
         private router: Router,
-        private store: PredictionDataShareService
+        private store: PredictionDataShareService,
+        private recognition: RecognitionService
     ) {
 
     }
@@ -33,35 +36,55 @@ export class CameraComponent {
 
         takePicture(options)
             .then(imageAsset => {
+                let backgroundClass = this.backgroundClass;
                 this.backgroundClass = '';
                 this.busy = true;
                 this.imageTaken = imageAsset;
 
-                setTimeout(() => {
-                    this.busy = false;
+                imageAsset.getImageAsync(image => {
+                    let imageSource = ImageSourceModule.fromNativeSource(image);
+                    let encodedString = imageSource.toBase64String("jpeg");
 
-                    this.store.storeResults([
-                        {
-                            name: "iPhone 8 Plus",
-                            description: "Color Black",
-                            rating: '90%'
-                        },
-                        {
-                            name: "iPhone 7 Plus",
-                            description: "Color Black",
-                            rating: '85%'
-                        },
-                        {
-                            name: "Galaxy S9",
-                            description: "Color Black",
-                            rating: '60%'
-                        }
-                    ]);
+                    console.log('Selected image;', encodedString);
+                    this.recognition.detectObjects(encodedString).subscribe(
+                        x => console.log('onNext: %s', x),
+                        e => {
+                            console.log('onError: %s', e);
 
-                    this.router.navigate([
-                        '/result'
-                    ]);
-                }, 1000);
+                            this.busy = false;
+                            this.backgroundClass = backgroundClass;
+                            this.router.navigate([
+                                '/'
+                            ]);
+                        },
+                        () => {
+                            console.log('onCompleted');
+
+                            this.busy = false;
+                            this.backgroundClass = backgroundClass;
+                            this.store.storeResults([
+                                {
+                                    name: "iPhone 8 Plus",
+                                    description: "Color Black",
+                                    rating: '90%'
+                                },
+                                {
+                                    name: "iPhone 7 Plus",
+                                    description: "Color Black",
+                                    rating: '85%'
+                                },
+                                {
+                                    name: "Galaxy S9",
+                                    description: "Color Red",
+                                    rating: '60%'
+                                }
+                            ]);
+
+                            this.router.navigate([
+                                '/result'
+                            ]);
+                        });
+                });
             }).catch(err => {
             console.log(err.message);
         });

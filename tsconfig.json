@@ -12,6 +12,9 @@
             "es2015.iterable"
         ],
         "baseUrl": ".",
+        "types": [
+            "node"
+        ],
         "paths": {
             "~/*": [
                 "app/*"

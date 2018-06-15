@@ -6,6 +6,7 @@ import {CameraComponent} from "~/prediction/camera/camera.component";
 import {ResultComponent} from "~/prediction/result/result.component";
 import {PredictionComponent} from "~/prediction/prediction.component";
 import {PredictionDataShareService} from "~/prediction/prediction-data-share.service";
+import {RecognitionService} from "~/recognition.service";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -28,7 +29,8 @@ import {PredictionDataShareService} from "~/prediction/prediction-data-share.ser
         PredictionComponent
     ],
     providers: [
-        PredictionDataShareService
+        PredictionDataShareService,
+        RecognitionService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
