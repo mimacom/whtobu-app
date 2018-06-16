@@ -1,12 +1,11 @@
-<DockLayout width="100%" height="100%">
-    <ListView dock="top" [items]="dataItems" (itemTap)="onItemTap($event)" class="p-15">
+<DockLayout width="100%" height="100%" stretchLastChild="true">
+    <Button dock="top" text="Go Back" [nsRouterLink]="['']" class="btn btn-primary btn-active"></Button>
+    <ListView dock="bottom" [items]="dataItems" (itemTap)="onItemTap($event)" class="p-15">
         <ng-template let-item="item" let-i="index">
             <StackLayout class="row">
-                <Label [text]='item.name'></Label>
-                <Label [text]='item.description'></Label>
-                <Label [text]='item.rating'></Label>
+                <Label [text]='item.Name'></Label>
+                <Label [text]='item.Confidence'></Label>
             </StackLayout>
         </ng-template>
     </ListView>
-    <Button dock="bottom" text="Go Back" [nsRouterLink]="['']" class="btn btn-primary btn-active"></Button>
 </DockLayout>

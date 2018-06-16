@@ -28,6 +28,10 @@ export class CameraComponent {
 
     onTakePhoto() {
 
+        if (this.busy) {
+            return;
+        }
+
         let options = {
             saveToGallery: this.saveToGallery,
             keepAspectRatio: true,
@@ -45,9 +49,14 @@ export class CameraComponent {
                     let imageSource = ImageSourceModule.fromNativeSource(image);
                     let encodedString = imageSource.toBase64String("jpeg");
 
-                    console.log('Selected image;', encodedString);
+                    let result = [];
+
                     this.recognition.detectObjects(encodedString).subscribe(
-                        x => console.log('onNext: %s', x),
+                        data => {
+                            console.log('onNext: %s', data);
+
+                            result = data.Labels;
+                        },
                         e => {
                             console.log('onError: %s', e);
 
@@ -62,23 +71,7 @@ export class CameraComponent {
 
                             this.busy = false;
                             this.backgroundClass = backgroundClass;
-                            this.store.storeResults([
-                                {
-                                    name: "iPhone 8 Plus",
-                                    description: "Color Black",
-                                    rating: '90%'
-                                },
-                                {
-                                    name: "iPhone 7 Plus",
-                                    description: "Color Black",
-                                    rating: '85%'
-                                },
-                                {
-                                    name: "Galaxy S9",
-                                    description: "Color Red",
-                                    rating: '60%'
-                                }
-                            ]);
+                            this.store.storeResults(result);
 
                             this.router.navigate([
                                 '/result'
