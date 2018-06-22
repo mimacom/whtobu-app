@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-import * as uuid from "nativescript-uuid";
 import {Observable} from 'rxjs'
 import * as dialogs from "ui/dialogs";
 
@@ -18,7 +17,7 @@ export class RecognitionService {
 
         AWS.config.update({
             region: 'eu-west-1',
-            credentials: new AWS.Credentials('', '')
+            credentials: new AWS.Credentials('AKIAIZNZ5MWMMEAVB7DA', 'gDiihhOYN1QyP+dLxWmHCu8/4IViH8WlYGyWGhYe')
         });
 
         AWS.config.apiVersions = {
@@ -33,6 +32,11 @@ export class RecognitionService {
                 Image: {
                     Bytes: new Buffer(image, 'base64')
                 }
+            };
+
+            let result = {
+                labels: {},
+                text: {}
             };
 
             rekognition.detectLabels(detectParams, function (error, response) {
@@ -50,8 +54,30 @@ export class RecognitionService {
                     observer.complete();
                 } else {
                     console.log('Got response:', response);
-                    observer.next(response);
-                    observer.complete();
+
+                    result.labels = response;
+
+                    rekognition.detectText(detectParams, function(err, data) {
+                        if (err) {
+                            dialogs.alert({
+                                title: "Error",
+                                message: error + "",
+                                okButtonText: "OK"
+                            }).then(() => {
+                                console.log("Dialog closed!");
+                            });
+
+                            console.log('Error from text Rekognition', error, error.stack); // an error occurred
+                            observer.error(error);
+                            observer.complete();
+                        } else {
+                            console.log(data);
+                            result.text = data;
+
+                            observer.next(result);
+                            observer.complete();
+                        }
+                    });
                 }
             });
         });

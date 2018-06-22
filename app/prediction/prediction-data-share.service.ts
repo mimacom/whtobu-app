@@ -3,13 +3,13 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class PredictionDataShareService {
 
-    private results: Array<any>;
+    private results: any;
 
     getResults() {
         return this.results;
     }
 
-    storeResults(results: Array<any>) {
+    storeResults(results: any) {
         this.results = results;
     }
 }

@@ -49,13 +49,19 @@ export class CameraComponent {
                     let imageSource = ImageSourceModule.fromNativeSource(image);
                     let encodedString = imageSource.toBase64String("jpeg");
 
-                    let result = [];
+                    let result = {
+                        labels: {},
+                        text: {}
+                    };
 
-                    this.recognition.detectObjects(encodedString).subscribe(
+                    let recognition = this.recognition;
+
+                    recognition.detectObjects(encodedString).subscribe(
                         data => {
                             console.log('onNext: %s', data);
 
-                            result = data.Labels;
+                            result.labels = data.labels.Labels;
+                            result.text = data.text.TextDetections;
                         },
                         e => {
                             console.log('onError: %s', e);
