@@ -17,7 +17,7 @@ export class RecognitionService {
 
         AWS.config.update({
             region: 'eu-west-1',
-            credentials: new AWS.Credentials('AKIAIZNZ5MWMMEAVB7DA', 'gDiihhOYN1QyP+dLxWmHCu8/4IViH8WlYGyWGhYe')
+            credentials: new AWS.Credentials('', '')
         });
 
         AWS.config.apiVersions = {
