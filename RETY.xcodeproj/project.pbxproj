@@ -213,6 +213,7 @@
 		31DC27C420EFA14D00241BAE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "mimacom Deutschland GmbH";
