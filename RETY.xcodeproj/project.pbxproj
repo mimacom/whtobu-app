@@ -18,7 +18,6 @@
 		31DC280420EFAF1B00241BAE /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC280320EFAF1B00241BAE /* StatusViewController.swift */; };
 		31DC280620EFAF2300241BAE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC280520EFAF2300241BAE /* Utilities.swift */; };
 		31DC280820EFAF2C00241BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC280720EFAF2C00241BAE /* AppDelegate.swift */; };
-		31DC280C20EFB09500241BAE /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC280B20EFB09500241BAE /* Plane.swift */; };
 		31DC281420EFDCEB00241BAE /* ObjectDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 31DC281320EFDCEA00241BAE /* ObjectDetector.mlmodel */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +56,6 @@
 		31DC280320EFAF1B00241BAE /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		31DC280520EFAF2300241BAE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		31DC280720EFAF2C00241BAE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "../../Areas/UsingVisionInRealTimeWithARKit 2/ARKitVision/Support/AppDelegate.swift"; sourceTree = "<group>"; };
-		31DC280B20EFB09500241BAE /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		31DC281320EFDCEA00241BAE /* ObjectDetector.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ObjectDetector.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,7 +141,6 @@
 		31DC280220EFAF1200241BAE /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				31DC280B20EFB09500241BAE /* Plane.swift */,
 				31DC280720EFAF2C00241BAE /* AppDelegate.swift */,
 				31DC280320EFAF1B00241BAE /* StatusViewController.swift */,
 				31DC280520EFAF2300241BAE /* Utilities.swift */,
@@ -289,7 +286,6 @@
 				31DC280420EFAF1B00241BAE /* StatusViewController.swift in Sources */,
 				31DC280620EFAF2300241BAE /* Utilities.swift in Sources */,
 				31DC281420EFDCEB00241BAE /* ObjectDetector.mlmodel in Sources */,
-				31DC280C20EFB09500241BAE /* Plane.swift in Sources */,
 				31DC280820EFAF2C00241BAE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

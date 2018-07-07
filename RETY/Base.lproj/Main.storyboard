@@ -12,7 +12,6 @@
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
                 <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="RETY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
@@ -20,6 +19,9 @@
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mOg-lq-JRF" appends="YES" id="mqu-JP-iUD"/>
+                                </connections>
                             </arscnView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-BB-EPg">
                                 <rect key="frame" x="0.0" y="20" width="1366" height="85"/>
@@ -45,9 +47,10 @@
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="mOg-lq-JRF">
                     <connections>
-                        <action selector="placeLabelAtLocationWithSender:" destination="BV1-FR-VrT" id="E81-Qj-AUr"/>
+                        <action selector="placeLabelAtLocationWithSender:" destination="BV1-FR-VrT" id="cZ5-3W-x5a"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -55,7 +58,7 @@
         <!--Status View Controller-->
         <scene sceneID="U7f-3c-Umf">
             <objects>
-                <viewController id="8cn-aW-UOb" customClass="StatusViewController" customModule="ARKitVision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8cn-aW-UOb" customClass="StatusViewController" customModule="RETY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7mt-c4-Qcq">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="85"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,9 +108,6 @@
                                         <integer key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="mOg-lq-JRF" appends="YES" id="r60-Di-g5L"/>
-                                </connections>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-eF-Tc0" userLabel="Restart Experience Button Icon">
                                 <rect key="frame" x="1322" y="20" width="44" height="59"/>
