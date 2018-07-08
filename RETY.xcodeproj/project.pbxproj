@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3192795820F2099400A4A1B6 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192795720F2099400A4A1B6 /* BoundingBox.swift */; };
 		31DC27D220EFA14D00241BAE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 31DC27D120EFA14D00241BAE /* art.scnassets */; };
 		31DC27D420EFA14D00241BAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC27D320EFA14D00241BAE /* ViewController.swift */; };
 		31DC27D720EFA14D00241BAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31DC27D520EFA14D00241BAE /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3192795720F2099400A4A1B6 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		31DC27CC20EFA14D00241BAE /* RETY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RETY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31DC27D120EFA14D00241BAE /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		31DC27D320EFA14D00241BAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				31DC280720EFAF2C00241BAE /* AppDelegate.swift */,
+				3192795720F2099400A4A1B6 /* BoundingBox.swift */,
 				31DC280320EFAF1B00241BAE /* StatusViewController.swift */,
 				31DC280520EFAF2300241BAE /* Utilities.swift */,
 			);
@@ -285,6 +288,7 @@
 				31DC27D420EFA14D00241BAE /* ViewController.swift in Sources */,
 				31DC280420EFAF1B00241BAE /* StatusViewController.swift in Sources */,
 				31DC280620EFAF2300241BAE /* Utilities.swift in Sources */,
+				3192795820F2099400A4A1B6 /* BoundingBox.swift in Sources */,
 				31DC281420EFDCEB00241BAE /* ObjectDetector.mlmodel in Sources */,
 				31DC280820EFAF2C00241BAE /* AppDelegate.swift in Sources */,
 			);

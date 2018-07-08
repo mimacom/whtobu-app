@@ -16,6 +16,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
 
     @IBOutlet var sceneView: ARSCNView!
 
+    var boundingBoxes = [BoundingBox]()
+    var colors: [String: UIColor] = [:]
+    var labels: [String] = []
+
     private lazy var statusViewController: StatusViewController = {
         return children.lazy.compactMap({ $0 as? StatusViewController }).first!
     }()
@@ -43,6 +47,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
 //            ARSCNDebugOptions.showFeaturePoints,
 //            ARSCNDebugOptions.showWorldOrigin
         ]
+        
+        sceneView.overlaySKScene = SKScene(size: view.frame.size)
 
         // Hook up status view controller callback.
         statusViewController.restartExperienceHandler = { [unowned self] in
@@ -136,27 +142,52 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
 
     private lazy var objectDetectionRequest: VNCoreMLRequest = {
         do {
-            let mlmodel = ObjectDetector()
+            var mlmodel = ObjectDetector()
             let userDefined: [String: String] = mlmodel.model.modelDescription.metadata[MLModelMetadataKey.creatorDefinedKey]! as! [String: String]
-            let labels = userDefined["classes"]!.components(separatedBy: ",")
+            labels = userDefined["classes"]!.components(separatedBy: ",")
 
             nmsThreshold = Float(userDefined["non_maximum_suppression_threshold"]!) ?? 0.5
 
             print("Labels: ", labels)
             print("nmsThreshold: ", nmsThreshold)
 
+            setUpBoundingBoxes(labels.count)
+
             let model = try VNCoreMLModel(for: mlmodel.model)
             let request = VNCoreMLRequest(model: model, completionHandler: self.processObjectDetection)
 
-//            request.imageCropAndScaleOption = .scaleFill
-
-            //request.usesCPUOnly = true
+            request.imageCropAndScaleOption = .scaleFill
+            request.usesCPUOnly = false
 
             return request
         } catch {
             fatalError("Failed to load Vision ML model: \(error)")
         }
     }()
+
+    func setUpBoundingBoxes(_ amount: Int) {
+        DispatchQueue.main.async {
+            for _ in 0..<self.maxBoundingBoxes {
+                let box = BoundingBox()
+                self.boundingBoxes.append(box)
+                box.addToLayer((self.sceneView.overlaySKScene?.view?.layer)!)
+            }
+        }
+
+        var i = 0
+
+        for r:CGFloat in [0.2, 0.4, 0.6, 0.8, 1.0] {
+            for g:CGFloat in [0.3, 0.7] {
+                for b:CGFloat in [0.4, 0.8] {
+                    let color = UIColor(red: r, green: g, blue: b, alpha: 1)
+                    if (i < amount) {
+                        colors[labels[i]] = color
+                        i = i + 1
+                    }
+                }
+            }
+        }
+    }
 
     struct Prediction {
         let label: String
@@ -184,242 +215,194 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
         }
     }
 
-//    func predictionsFromMultiDimensionalArrays(observations: [VNRecognizedObjectObservation]?, nmsThreshold: Float = 0.5) -> [Prediction]? {
-//
-//        guard let results = observations else {
-//            return nil
-//        }
-//
-//        var confidenceThreshold = 0.25
-//        var predictions: [Prediction] = []
-//        var unorderedPredictions = [Prediction]()
-//
-//        for case let foundObject in results {
-//
-//            let bestLabel = foundObject.labels.first!
-//
-//            if (confidence > confidenceThreshold) {
-//                unorderedPredictions.append(Prediction(
-//                        label: bestLabel.identifier,
-//                        confidence: bestLabel.confidence,
-//                        boundingBox: foundObject.boundingBox
-//                ))
-//            }
-//        }
-//
-//        let orderedPredictions = unorderedPredictions.sorted { $0.confidence > $1.confidence }
-//        var keep = [Bool](repeating: true, count: orderedPredictions.count)
-//        for i in 0..<orderedPredictions.count {
-//            if keep[i] {
-//                predictions.append(orderedPredictions[i])
-//                let bbox1 = orderedPredictions[i].boundingBox
-//                for j in (i+1)..<orderedPredictions.count {
-//                    if keep[j] {
-//                        let bbox2 = orderedPredictions[j].boundingBox
-//                        if IoU(bbox1, bbox2) > nmsThreshold {
-//                            keep[j] = false
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        return predictions
-//    }
-
-    var counter: Int = 0
-
     func processObjectDetection(for request: VNRequest, error: Error?) {
-
         guard let results = request.results as? [VNRecognizedObjectObservation] else {
             return
         }
         
-        if (anchors.count > 0) {
-            for existingAnchor in sceneView.session.currentFrame!.anchors {
-                sceneView.session.remove(anchor: existingAnchor)
+        let confidenceThreshold: Float = 0.25
+        var unorderedPredictions = [Prediction]()
+        
+        for case let prediction in results {
+            let bestLabel = prediction.labels.first!
+            
+            if bestLabel.confidence > confidenceThreshold {
+                let prediction = Prediction(
+                    label: bestLabel.identifier,
+                    confidence: bestLabel.confidence,
+                    boundingBox: prediction.boundingBox
+                )
+                
+                unorderedPredictions.append(prediction)
+            }
+        }
+        
+        var predictions: [Prediction] = []
+        let orderedPredictions = unorderedPredictions.sorted { $0.confidence > $1.confidence }
+        var keep = [Bool](repeating: true, count: orderedPredictions.count)
+        for i in 0..<orderedPredictions.count {
+            if keep[i] {
+                predictions.append(orderedPredictions[i])
+                let bbox1 = orderedPredictions[i].boundingBox
+                for j in (i+1)..<orderedPredictions.count {
+                    if keep[j] {
+                        let bbox2 = orderedPredictions[j].boundingBox
+                        if IoU(bbox1, bbox2) > nmsThreshold {
+                            keep[j] = false
+                        }
+                    }
+                }
             }
         }
 
-        for foundObject in results {
-            let bestLabel = foundObject.labels.first!
+        let image = CIImage(cvPixelBuffer: currentBuffer!)
 
-            drawRectangle(prediction: Prediction(
-                    label: bestLabel.identifier,
-                    confidence: bestLabel.confidence,
-                    boundingBox: foundObject.boundingBox
-            ))
+        for i in 0..<boundingBoxes.count {
+            if i < predictions.count {
+                let prediction = predictions[i]
+
+                DispatchQueue.main.sync {
+                    drawRectangle(
+                        prediction,
+                        boundingBoxes[i],
+                        image
+                    )
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.boundingBoxes[i].hide()
+                }
+            }
         }
 
-        self.currentBuffer = nil
-
-//        self.currentBuffer = nil
-
-//        var unorderedPredictions = [Prediction]()
-//
-//        for case let foundObject as VNRecognizedObjectObservation in results {
-//
-////            print("Found object:", foundObject)
-//
-//            let bestLabel = foundObject.labels.first! // Label with highest confidence
-//
-////            print(bestLabel.identifier, bestLabel.confidence, objectBounds)
-//
-//            unorderedPredictions.append(Prediction(
-//                    label: bestLabel.identifier,
-//                    confidence: bestLabel.confidence,
-//                    boundingBox: foundObject.boundingBox
-//            ))
-//        }
-//
-//        var predictions: [Prediction] = []
-//        let orderedPredictions = unorderedPredictions.sorted { $0.confidence > $1.confidence }
-//        var keep = [Bool](repeating: true, count: orderedPredictions.count)
-//
-//        for i in 0..<orderedPredictions.count {
-//
-//            if keep[i] {
-//
-//                predictions.append(orderedPredictions[i])
-//                let bbox1 = orderedPredictions[i].boundingBox
-//
-//                for j in (i+1)..<orderedPredictions.count {
-//
-//                    if keep[j] {
-//
-//                        let bbox2 = orderedPredictions[j].boundingBox
-//
-//                        if IoU(bbox1, bbox2) > nmsThreshold {
-//                            keep[j] = false
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-//        for case let prediction in predictions {
-//            DispatchQueue.main.async { [weak self] in
-//                self?.placeBoxAtLocation(box: prediction.boundingBox, label: prediction.label + " " + String(prediction.confidence * 100) + "%")
-//                self?.displayClassifierResults()
-//            }
-//        }
+        currentBuffer = nil
+    }
+    
+    func IoU(_ a: CGRect, _ b: CGRect) -> Float {
+        let intersection = a.intersection(b)
+        let union = a.union(b)
+        return Float((intersection.width * intersection.height) / (union.width * union.height))
     }
 
-    func drawRectangle(prediction: Prediction) {
+    var maxBoundingBoxes = 10
 
-        guard let currentBuffer = currentBuffer else {
-            return
-        }
+    func drawRectangle(_ prediction: Prediction, _ box: BoundingBox, _ image: CIImage) {
 
         let detectedRectangle = prediction.boundingBox
-        let pct = Float(Int(prediction.confidence * 10000)) / 100
-
-        let image = CIImage(cvPixelBuffer: currentBuffer)
 
         // Verify detected rectangle is valid.
         let boundingBox = detectedRectangle.scaled(to: image.extent.size)
         guard image.extent.contains(boundingBox) else {
-            print("invalid detected rectangle", boundingBox);
+//            print("invalid detected rectangle", boundingBox);
             return
         }
 
-        print("Image width", image.extent.width)
-        print("Image height", image.extent.height)
+//        print("Image width", image.extent.width)
+//        print("Image height", image.extent.height)
+//
+//        print("Plane width", image.extent.size.width * detectedRectangle.size.width)
+//        print("Plane height", image.extent.size.height * detectedRectangle.size.height)
+//        print("Plane X", image.extent.size.width * detectedRectangle.origin.x)
+//        print("Plane Y", image.extent.size.height * detectedRectangle.origin.y)
+//
+//        print("Label", prediction.label)
+//        print("Confidence", String(format: "%.1f", prediction.confidence * 100))
+//        print("Bounding Box", boundingBox)
+//        print("Detected Rectangle", detectedRectangle)
 
-        print("Plane width", image.extent.size.width * detectedRectangle.size.width)
-        print("Plane height", image.extent.size.height * detectedRectangle.size.height)
-        print("Plane X", image.extent.size.width * detectedRectangle.origin.x)
-        print("Plane Y", image.extent.size.height * detectedRectangle.origin.y)
+        let label = String(format: "%@ %.1f", prediction.label, prediction.confidence * 100)
+        let color = colors[prediction.label]
 
-
-        print("Label", prediction.label)
-        print("Confidence", pct)
-        print("Bounding Box", boundingBox)
-        print("Detected Rectangle", detectedRectangle)
-
-
-        let hitTestResults = sceneView.hitTest(boundingBox.origin, types: [.featurePoint, .estimatedHorizontalPlane])
-
-        if let result = hitTestResults.first {
-
-            let anchor = ARAnchor(transform: result.worldTransform)
-
-            anchors[anchor.identifier] = RenderItem(
-                    label: prediction.label,
-                    boundingBox: boundingBox
+        DispatchQueue.main.async {
+            box.show(
+                    frame: boundingBox,
+                    label: label,
+                    color: color!
             )
-
-            sceneView.session.add(anchor: anchor)
         }
 
-        // Show the pre-processed image
-//        DispatchQueue.main.async {
-//            self.imageView.image = self.drawOnImage(source: self.imageView.image!, boundingRect: detectedRectangle)
+//        print("Show box", label, color, boundingBox)
+
+//        let hitTestResults = sceneView.hitTest(boundingBox.origin, types: [.featurePoint, .estimatedHorizontalPlane])
+//
+//        if let result = hitTestResults.first {
+//
+//            let anchor = ARAnchor(transform: result.worldTransform)
+//
+//            anchors[anchor.identifier] = RenderItem(
+//                    label: prediction.label,
+//                    boundingBox: boundingBox
+//            )
+//
+//            sceneView.session.add(anchor: anchor)
 //        }
     }
 
-
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-
-        print("Anchor added", anchor)
-
-        guard let renderItem = anchors[anchor.identifier] else {
-            print("missing expected associated render item for anchor", anchors, anchor)
-            return
-        }
-
-        let ratio = anchor.transform.position().x / Float(renderItem.boundingBox.origin.x)
-        
-        let width = ratio * Float(renderItem.boundingBox.width)
-        let height = ratio * Float(renderItem.boundingBox.height)
-        
-        let positionX = anchor.transform.position().x
-        let positionY = anchor.transform.position().y
-
-        let plane = SCNPlane(width: CGFloat(width), height: CGFloat(height))
-
-        let material = SCNMaterial()
-        let color: UIColor
-
-        if (renderItem.label.contains("bike")) {
-            color = UIColor.green
-        } else if (renderItem.label.contains("person")) {
-            color = UIColor.blue
-        } else {
-            color = UIColor.red
-        }
-
-        material.diffuse.contents = color
-        material.specular.contents = UIColor.white
-        material.shininess = 1
-        material.isDoubleSided = true
-        material.transparency = 0.3
-        plane.materials = [material]
-
-        let text = SCNText(string: renderItem.label.capitalized, extrusionDepth: 0.02)
-        let font = UIFont(name: "Futura", size: 0.30)
-
-        text.font = font
-        text.alignmentMode = CATextLayerAlignmentMode.center.rawValue
-        text.firstMaterial?.diffuse.contents = UIColor.yellow
-        text.firstMaterial?.specular.contents = UIColor.white
-        text.firstMaterial?.isDoubleSided = true
-        text.chamferRadius = 0.01
-
-        let (minBound, maxBound) = text.boundingBox
-
-        let textNode = SCNNode(geometry: text)
-        textNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x) / 2, minBound.y, 0.02 / 2)
-        textNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
-        textNode.position = SCNVector3Make(0, 0, 0)
-
-        let planeNode = SCNNode(geometry: plane)
-//        planeNode.pivot = SCNMatrix4MakeTranslation(positionX, positionY, 0)
-        planeNode.position = SCNVector3Make(0, 0, 0)
-        planeNode.addChildNode(textNode)
-
-        node.addChildNode(planeNode)
-    }
+//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+//
+//        print("Anchor added", anchor)
+//
+//        guard let renderItem = anchors[anchor.identifier] else {
+//            print("missing expected associated render item for anchor", anchors, anchor)
+//            return
+//        }
+//
+//        let ratio = anchor.transform.position().x / Float(renderItem.boundingBox.origin.x)
+//
+//        let width = ratio * Float(renderItem.boundingBox.width)
+//        let height = ratio * Float(renderItem.boundingBox.height)
+//
+//        let cameraTransform = sceneView.session.currentFrame?.camera.transform
+//
+//        print("Camera Transform", cameraTransform)
+//
+//        let positionX = anchor.transform.position().x
+//        let positionY = anchor.transform.position().y
+//
+//        let plane = SCNPlane(width: CGFloat(width), height: CGFloat(height))
+//
+//        let material = SCNMaterial()
+//        let color: UIColor
+//
+//        if (renderItem.label.contains("bike")) {
+//            color = UIColor.green
+//        } else if (renderItem.label.contains("person")) {
+//            color = UIColor.blue
+//        } else {
+//            color = UIColor.red
+//        }
+//
+//        material.diffuse.contents = color
+//        material.specular.contents = UIColor.white
+//        material.shininess = 1
+//        material.isDoubleSided = true
+//        material.transparency = 0.3
+//        plane.materials = [material]
+//
+//        let text = SCNText(string: renderItem.label.capitalized, extrusionDepth: 0.02)
+//        let font = UIFont(name: "Futura", size: 0.30)
+//
+//        text.font = font
+//        text.alignmentMode = CATextLayerAlignmentMode.center.rawValue
+//        text.firstMaterial?.diffuse.contents = UIColor.yellow
+//        text.firstMaterial?.specular.contents = UIColor.white
+//        text.firstMaterial?.isDoubleSided = true
+//        text.chamferRadius = 0.01
+//
+//        let (minBound, maxBound) = text.boundingBox
+//
+//        let textNode = SCNNode(geometry: text)
+//        textNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x) / 2, minBound.y, 0.02 / 2)
+//        textNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+//        textNode.position = SCNVector3Make(0, 0, 0)
+//
+//        let planeNode = SCNNode(geometry: plane)
+////        planeNode.pivot = SCNMatrix4MakeTranslation(positionX, positionY, 0)
+//        planeNode.position = SCNVector3Make(0, 0, 0)
+//        planeNode.addChildNode(textNode)
+//
+//        node.addChildNode(planeNode)
+//    }
 
     struct RenderItem {
         let label: String
@@ -446,93 +429,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
 //            anchorLabels[anchor.identifier] = identifierString
         }
     }
-
-//    private func placeBoxAtLocation(box: CGRect, label: String) {
-//
-//        let hitTestResults = sceneView.hitTest(box.origin, types: [.featurePoint])
-//
-////        print("Hit Test Results", hitTestResults)
-//
-//        if let result = hitTestResults.first {
-//
-//            for existingAnchor in sceneView.session.currentFrame!.anchors {
-//                sceneView.session.remove(anchor: existingAnchor)
-//            }
-//
-//            anchorLabels = [UUID: InfoPlane]()
-//
-//            // Add a new anchor at the location.
-//            let anchor = ARAnchor(transform: result.worldTransform)
-//            sceneView.session.add(anchor: anchor)
-//
-//            // Track anchor ID to associate text with the anchor after ARKit creates a corresponding SKNode.
-//            anchorLabels[anchor.identifier] = InfoPlane(label: label, box: box)
-//
-////            print("Added box", label, anchor)
-//        }
-//    }
-//
-//    struct InfoPlane {
-//        let label: String
-//        let box: CGRect
-//    }
-
-//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-//
-//        guard let infoPlane = anchorLabels[anchor.identifier] else {
-//            print("missing expected associated label for anchor")
-//            return
-//        }
-//
-////        let label = Plane(anchor: anchor, label: infoPlane.label, box: infoPlane.box)
-////        print("Add label", label)
-//
-////        node.addChildNode(getMesh())
-//
-//        let plane = SCNPlane(width: 0.02, height: 0.02)
-//
-//        let material = SCNMaterial()
-//        let color: UIColor
-//
-//        if (infoPlane.label.contains("bike")) {
-//            color = UIColor.green
-//        } else if (infoPlane.label.contains("person")) {
-//            color = UIColor.blue
-//        } else {
-//            color = UIColor.red
-//        }
-//
-//        material.diffuse.contents = color
-//        material.specular.contents = UIColor.white
-//        material.shininess = 1
-//        material.isDoubleSided = true
-//        material.transparency = 0.3
-//        plane.materials = [material]
-//
-//        let text = SCNText(string: infoPlane.label.capitalized, extrusionDepth: 0.02)
-//        let font = UIFont(name: "Futura", size: 0.30)
-//        text.font = font
-//        text.alignmentMode = CATextLayerAlignmentMode.center.rawValue
-//        text.firstMaterial?.diffuse.contents = UIColor.yellow
-//        text.firstMaterial?.specular.contents = UIColor.white
-//        text.firstMaterial?.isDoubleSided = true
-//        text.chamferRadius = 0.01
-//
-//        let (minBound, maxBound) = text.boundingBox
-//
-//        let textNode = SCNNode(geometry: text)
-//        textNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x) / 2, minBound.y, 0.02 / 2)
-//        textNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
-//        textNode.position = SCNVector3Make(0, 0, 0)
-//
-//        let planeNode = SCNNode(geometry: plane)
-//        planeNode.position = SCNVector3Make(0, 0, 0)
-//        planeNode.addChildNode(textNode)
-//
-//        node.addChildNode(planeNode)
-//    }
-
-    // MARK: - AR Session Handling
 
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         statusViewController.showTrackingQualityInfo(for: camera.trackingState, autoHide: true)
@@ -567,10 +463,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
         }
     }
 
-//    private func sessionWasInterrupted(_ session: ARSession) {
-//        setOverlaysHidden(true)
-//    }
-
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
         /*
          Allow the session to attempt to resume after an interruption.
@@ -581,19 +473,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
         return true
     }
 
-//    private func setOverlaysHidden(_ shouldHide: Bool) {
-//        sceneView.scene.children.forEach { node in
-//            if shouldHide {
-//                // Hide overlay content immediately during relocalization.
-//                node.alpha = 0
-//            } else {
-//                // Fade overlay content in after relocalization succeeds.
-//                node.run(.fadeIn(withDuration: 0.5))
-//            }
-//        }
-//    }
-
     private func restartSession() {
+
         statusViewController.cancelAllScheduledMessages()
         statusViewController.showMessage("RESTARTING SESSION")
 
