@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3192795820F2099400A4A1B6 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192795720F2099400A4A1B6 /* BoundingBox.swift */; };
+		3192795C20F2978B00A4A1B6 /* ObjectDetection.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3192795B20F2978A00A4A1B6 /* ObjectDetection.mlmodel */; };
 		31DC27D220EFA14D00241BAE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 31DC27D120EFA14D00241BAE /* art.scnassets */; };
 		31DC27D420EFA14D00241BAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC27D320EFA14D00241BAE /* ViewController.swift */; };
 		31DC27D720EFA14D00241BAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31DC27D520EFA14D00241BAE /* Main.storyboard */; };
@@ -19,7 +20,6 @@
 		31DC280420EFAF1B00241BAE /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC280320EFAF1B00241BAE /* StatusViewController.swift */; };
 		31DC280620EFAF2300241BAE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC280520EFAF2300241BAE /* Utilities.swift */; };
 		31DC280820EFAF2C00241BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC280720EFAF2C00241BAE /* AppDelegate.swift */; };
-		31DC281420EFDCEB00241BAE /* ObjectDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 31DC281320EFDCEA00241BAE /* ObjectDetector.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		3192795720F2099400A4A1B6 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		3192795B20F2978A00A4A1B6 /* ObjectDetection.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ObjectDetection.mlmodel; sourceTree = "<group>"; };
 		31DC27CC20EFA14D00241BAE /* RETY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RETY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31DC27D120EFA14D00241BAE /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		31DC27D320EFA14D00241BAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +59,6 @@
 		31DC280320EFAF1B00241BAE /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		31DC280520EFAF2300241BAE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		31DC280720EFAF2C00241BAE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "../../Areas/UsingVisionInRealTimeWithARKit 2/ARKitVision/Support/AppDelegate.swift"; sourceTree = "<group>"; };
-		31DC281320EFDCEA00241BAE /* ObjectDetector.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ObjectDetector.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +112,9 @@
 				31DC280220EFAF1200241BAE /* Support */,
 				31DC27D120EFA14D00241BAE /* art.scnassets */,
 				31DC27D320EFA14D00241BAE /* ViewController.swift */,
+				3192795B20F2978A00A4A1B6 /* ObjectDetection.mlmodel */,
 				31DC27D520EFA14D00241BAE /* Main.storyboard */,
 				31DC27D820EFA14E00241BAE /* Assets.xcassets */,
-				31DC281320EFDCEA00241BAE /* ObjectDetector.mlmodel */,
 				31DC27DA20EFA14E00241BAE /* LaunchScreen.storyboard */,
 				31DC27FF20EFA44700241BAE /* logo.png */,
 				31DC27DD20EFA14E00241BAE /* Info.plist */,
@@ -286,10 +286,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				31DC27D420EFA14D00241BAE /* ViewController.swift in Sources */,
+				3192795C20F2978B00A4A1B6 /* ObjectDetection.mlmodel in Sources */,
 				31DC280420EFAF1B00241BAE /* StatusViewController.swift in Sources */,
 				31DC280620EFAF2300241BAE /* Utilities.swift in Sources */,
 				3192795820F2099400A4A1B6 /* BoundingBox.swift in Sources */,
-				31DC281420EFDCEB00241BAE /* ObjectDetector.mlmodel in Sources */,
 				31DC280820EFAF2C00241BAE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

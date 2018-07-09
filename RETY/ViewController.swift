@@ -26,7 +26,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Set the view's delegate
         sceneView.delegate = self
 
@@ -42,6 +42,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
 
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = false
+        
+        sceneView.preferredFramesPerSecond = 50
 
         sceneView.debugOptions = [
 //            ARSCNDebugOptions.showFeaturePoints,
@@ -115,6 +117,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         configuration.isLightEstimationEnabled = true
+//        configuration.videoFormat = ARWorldTrackingConfiguration.supportedVideoFormats[2]
 
         // Run the view's session
         sceneView.session.run(configuration)
@@ -142,7 +145,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
 
     private lazy var objectDetectionRequest: VNCoreMLRequest = {
         do {
-            var mlmodel = ObjectDetector()
+            var mlmodel = ObjectDetection()
             let userDefined: [String: String] = mlmodel.model.modelDescription.metadata[MLModelMetadataKey.creatorDefinedKey]! as! [String: String]
             labels = userDefined["classes"]!.components(separatedBy: ",")
 
@@ -157,7 +160,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
             let request = VNCoreMLRequest(model: model, completionHandler: self.processObjectDetection)
 
             request.imageCropAndScaleOption = .scaleFill
-            request.usesCPUOnly = false
+            request.usesCPUOnly = true
 
             return request
         } catch {
@@ -269,7 +272,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
                     )
                 }
             } else {
-                DispatchQueue.main.async {
+                DispatchQueue.main.sync {
                     self.boundingBoxes[i].hide()
                 }
             }
@@ -307,15 +310,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ARSCNViewDe
 //
 //        print("Label", prediction.label)
 //        print("Confidence", String(format: "%.1f", prediction.confidence * 100))
-//        print("Bounding Box", boundingBox)
-//        print("Detected Rectangle", detectedRectangle)
+        print("Bounding Box", boundingBox)
+        print("Detected Rectangle", detectedRectangle)
 
         let label = String(format: "%@ %.1f", prediction.label, prediction.confidence * 100)
         let color = colors[prediction.label]
+        
+        let rect = CGRect(
+            x: (image.extent.size.width * detectedRectangle.origin.x),
+            y: (image.extent.size.height * detectedRectangle.origin.y),
+            width: image.extent.size.width * detectedRectangle.size.width,
+            height: image.extent.size.height * detectedRectangle.size.height
+        )
 
         DispatchQueue.main.async {
             box.show(
-                    frame: boundingBox,
+                    frame: CGRect(
+                        x: rect.midX / 3,
+                        y: rect.midY / 4,
+                        width: (image.extent.size.width * detectedRectangle.size.width) / 2,
+                        height: (image.extent.size.height * detectedRectangle.size.height) / 2
+                    ),
                     label: label,
                     color: color!
             )
