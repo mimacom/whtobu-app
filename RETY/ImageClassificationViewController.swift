@@ -14,8 +14,7 @@ class ImageClassificationViewController: UIViewController {
     // MARK: - IBOutlets
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var classificationLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Image Classification
     
@@ -33,10 +32,27 @@ class ImageClassificationViewController: UIViewController {
             fatalError("Failed to load Vision ML model: \(error)")
         }
     }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.activityIndicator.transform = CGAffineTransform(scaleX: 4, y: 4)
+        stopSpinner()
+    }
+    
+    func stopSpinner() {
+        self.activityIndicator.isHidden = true
+        self.activityIndicator.stopAnimating()
+    }
+    
+    func startSpinner() {
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+    }
     
     /// - Tag: PerformRequests
     func updateClassifications(for image: UIImage) {
-        classificationLabel.text = "Classifying..."
+        startSpinner()
         
         let orientation = CGImagePropertyOrientation(image.imageOrientation)
         guard let ciImage = CIImage(image: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
@@ -52,6 +68,7 @@ class ImageClassificationViewController: UIViewController {
                  to processing that request.
                  */
                 print("Failed to perform classification.\n\(error.localizedDescription)")
+                self.stopSpinner()
             }
         }
     }
@@ -61,14 +78,17 @@ class ImageClassificationViewController: UIViewController {
     func processClassifications(for request: VNRequest, error: Error?) {
         DispatchQueue.main.async {
             guard let results = request.results else {
-                self.classificationLabel.text = "Unable to classify image.\n\(error!.localizedDescription)"
+                print("Unable to classify image.\n\(error!.localizedDescription)")
+                self.stopSpinner()
                 return
             }
+            
             // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
             let classifications = results as! [VNClassificationObservation]
         
             if classifications.isEmpty {
-                self.classificationLabel.text = "Nothing recognized."
+                print("Nothing recognized.")
+                self.stopSpinner()
             } else {
                 // Display top classifications ranked by confidence in the UI.
                 let topClassifications = classifications.prefix(2)
@@ -76,7 +96,14 @@ class ImageClassificationViewController: UIViewController {
                     // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
                    return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
                 }
-                self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
+                
+                print("Classification:\n" + descriptions.joined(separator: "\n"))
+                self.stopSpinner()
+                                
+                let resultsTableViewController = ResultsTableViewController()
+                resultsTableViewController.results = descriptions
+                
+                self.present(resultsTableViewController, animated: true)
             }
         }
     }

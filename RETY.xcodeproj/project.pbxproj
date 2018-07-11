@@ -18,6 +18,9 @@
 		3170B29520F687D2000FD1AF /* ProductClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */; };
 		3170B29720F68854000FD1AF /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3170B29620F68854000FD1AF /* LICENSE */; };
 		3170B29920F68A71000FD1AF /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3170B29820F68A71000FD1AF /* LaunchImage.png */; };
+		3170B29D20F69F9E000FD1AF /* ResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */; };
+		3170B29F20F6A294000FD1AF /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */; };
+		3170B2A320F6B463000FD1AF /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B2A220F6B463000FD1AF /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ProductClassifier.mlmodel; sourceTree = "<group>"; };
 		3170B29620F68854000FD1AF /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LICENSE; path = ../Areas/Context/ClassifyingImagesWithVisionAndCoreML/LICENSE; sourceTree = "<group>"; };
 		3170B29820F68A71000FD1AF /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchImage.png; path = Rety/LaunchImage.png; sourceTree = SOURCE_ROOT; };
+		3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewController.swift; sourceTree = "<group>"; };
+		3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		3170B2A220F6B463000FD1AF /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,9 @@
 				3170B29020F687BC000FD1AF /* ImageClassificationViewController.swift */,
 				3170B29220F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift */,
 				3170B26620F68621000FD1AF /* Main.storyboard */,
+				3170B2A220F6B463000FD1AF /* NavigationController.swift */,
+				3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */,
+				3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */,
 				3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */,
 				3170B26920F68622000FD1AF /* Assets.xcassets */,
 				3170B26B20F68622000FD1AF /* LaunchScreen.storyboard */,
@@ -270,10 +279,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3170B29F20F6A294000FD1AF /* ResultsTableViewController.swift in Sources */,
 				3170B29320F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
 				3170B26320F68621000FD1AF /* AppDelegate.swift in Sources */,
 				3170B29120F687BC000FD1AF /* ImageClassificationViewController.swift in Sources */,
 				3170B29520F687D2000FD1AF /* ProductClassifier.mlmodel in Sources */,
+				3170B2A320F6B463000FD1AF /* NavigationController.swift in Sources */,
+				3170B29D20F69F9E000FD1AF /* ResultTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
