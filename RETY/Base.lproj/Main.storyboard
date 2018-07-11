@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="x5V-KW-d5j">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Image Classification View Controller-->
+        <scene sceneID="wgF-D5-lhE">
+            <objects>
+                <viewController id="x5V-KW-d5j" customClass="ImageClassificationViewController" customModule="Rety" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dOU-jN-Fx8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jvu-gP-Ed0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WoI-xI-B1F">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="camera" id="vwr-ET-grm">
+                                        <connections>
+                                            <action selector="takePicture" destination="x5V-KW-d5j" id="MDE-DM-auF"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="vTZ-N9-daa"/>
+                                </items>
+                            </toolbar>
+                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enb-w0-dUW">
+                                <rect key="frame" x="16" y="546.5" width="138" height="60.5"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aE1-qF-ucA">
+                                    <rect key="frame" x="0.0" y="0.0" width="138" height="61"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Add a photo." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbb-UG-T8a">
+                                            <rect key="frame" x="20" y="20" width="98" height="20.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="qbb-UG-T8a" secondAttribute="bottom" constant="20" symbolic="YES" id="1TM-nD-hhl"/>
+                                        <constraint firstAttribute="trailing" secondItem="qbb-UG-T8a" secondAttribute="trailing" constant="20" symbolic="YES" id="IIK-fF-vGk"/>
+                                        <constraint firstItem="qbb-UG-T8a" firstAttribute="top" secondItem="aE1-qF-ucA" secondAttribute="top" constant="20" symbolic="YES" id="TQ9-3e-ax9"/>
+                                        <constraint firstItem="qbb-UG-T8a" firstAttribute="leading" secondItem="aE1-qF-ucA" secondAttribute="leading" constant="20" symbolic="YES" id="hIl-gc-iFm"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jvu-gP-Ed0" firstAttribute="top" secondItem="dOU-jN-Fx8" secondAttribute="top" id="0f7-SV-WTL"/>
+                            <constraint firstItem="Jvu-gP-Ed0" firstAttribute="trailing" secondItem="WoI-xI-B1F" secondAttribute="trailing" id="Bxk-WA-2Pl"/>
+                            <constraint firstItem="Jvu-gP-Ed0" firstAttribute="leading" secondItem="WoI-xI-B1F" secondAttribute="leading" id="GtA-KO-oWW"/>
+                            <constraint firstItem="WoI-xI-B1F" firstAttribute="top" secondItem="enb-w0-dUW" secondAttribute="bottom" constant="16" id="Had-98-hjQ"/>
+                            <constraint firstItem="Jvu-gP-Ed0" firstAttribute="bottom" secondItem="WoI-xI-B1F" secondAttribute="bottom" id="MlO-ed-JF3"/>
+                            <constraint firstItem="ZLP-p1-K1y" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="enb-w0-dUW" secondAttribute="trailing" constant="16" id="ckX-js-Iph"/>
+                            <constraint firstItem="enb-w0-dUW" firstAttribute="leading" secondItem="dOU-jN-Fx8" secondAttribute="leadingMargin" id="csF-D6-DCq"/>
+                            <constraint firstItem="Jvu-gP-Ed0" firstAttribute="centerY" secondItem="dOU-jN-Fx8" secondAttribute="centerY" id="eWQ-bw-LAL"/>
+                            <constraint firstItem="Jvu-gP-Ed0" firstAttribute="leading" secondItem="dOU-jN-Fx8" secondAttribute="leading" id="nIy-D5-Pdh"/>
+                            <constraint firstAttribute="trailing" secondItem="Jvu-gP-Ed0" secondAttribute="trailing" id="qtA-LJ-aD3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZLP-p1-K1y"/>
+                    </view>
+                    <connections>
+                        <outlet property="cameraButton" destination="vwr-ET-grm" id="umx-Me-kd4"/>
+                        <outlet property="classificationLabel" destination="qbb-UG-T8a" id="yh8-9S-3Wj"/>
+                        <outlet property="imageView" destination="Jvu-gP-Ed0" id="VWr-x8-FHE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qn8-Wi-2wh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139.5" y="138.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LaunchImage.png" width="1125" height="2436"/>
+    </resources>
+</document>

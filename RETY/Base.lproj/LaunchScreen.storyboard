@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jPK-Dx-brK">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ToL-Lu-8bf">
+            <objects>
+                <viewController id="jPK-Dx-brK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DtO-1n-vln"/>
+                        <viewControllerLayoutGuide type="bottom" id="L9z-tp-Pba"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zla-IN-mxp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="KBg-mt-tyX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXD-pM-oB0">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="camera" id="YWg-2z-zkH"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GGz-gl-ylK"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KBg-mt-tyX" firstAttribute="top" secondItem="zla-IN-mxp" secondAttribute="top" id="0jR-Fx-aM1"/>
+                            <constraint firstAttribute="trailing" secondItem="KBg-mt-tyX" secondAttribute="trailing" id="IWs-Qb-f7q"/>
+                            <constraint firstItem="KBg-mt-tyX" firstAttribute="leading" secondItem="tXD-pM-oB0" secondAttribute="leading" id="NiT-xO-Giw"/>
+                            <constraint firstItem="KBg-mt-tyX" firstAttribute="leading" secondItem="zla-IN-mxp" secondAttribute="leading" id="eOv-fy-Fyz"/>
+                            <constraint firstItem="KBg-mt-tyX" firstAttribute="centerY" secondItem="zla-IN-mxp" secondAttribute="centerY" id="fho-qs-WEj"/>
+                            <constraint firstItem="KBg-mt-tyX" firstAttribute="bottom" secondItem="tXD-pM-oB0" secondAttribute="bottom" id="vMq-Cb-7tg"/>
+                            <constraint firstItem="KBg-mt-tyX" firstAttribute="trailing" secondItem="tXD-pM-oB0" secondAttribute="trailing" id="zmk-zw-GTN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tDD-sw-W6a"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0EJ-ZT-TrM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LaunchImage.png" width="1125" height="2436"/>
+    </resources>
+</document>
