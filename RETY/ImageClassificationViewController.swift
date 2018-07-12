@@ -103,7 +103,10 @@ class ImageClassificationViewController: UIViewController {
                 let resultsTableViewController = ResultsTableViewController()
                 resultsTableViewController.results = descriptions
                 
-                self.present(resultsTableViewController, animated: true)
+                let nivationController = UINavigationController(rootViewController: resultsTableViewController)
+                nivationController.navigationBar.barStyle = UIBarStyle.blackTranslucent
+                
+                self.present(nivationController, animated: true)
             }
         }
     }
