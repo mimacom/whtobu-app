@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311066B020F781C000E8E125 /* LaunchImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 311066AF20F781BF00E8E125 /* LaunchImage.jpg */; };
+		311066B220F7C92800E8E125 /* AmazonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311066B120F7C92800E8E125 /* AmazonService.swift */; };
+		311066B420F7CAEC00E8E125 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311066B320F7CAEC00E8E125 /* Product.swift */; };
+		311066BC20F7DC5900E8E125 /* AWSSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311066BB20F7DC5900E8E125 /* AWSSignature.swift */; };
 		3170B26320F68621000FD1AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B26220F68621000FD1AF /* AppDelegate.swift */; };
 		3170B26820F68621000FD1AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3170B26620F68621000FD1AF /* Main.storyboard */; };
 		3170B26A20F68622000FD1AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3170B26920F68622000FD1AF /* Assets.xcassets */; };
@@ -17,9 +21,9 @@
 		3170B29320F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29220F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
 		3170B29520F687D2000FD1AF /* ProductClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */; };
 		3170B29720F68854000FD1AF /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3170B29620F68854000FD1AF /* LICENSE */; };
-		3170B29920F68A71000FD1AF /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3170B29820F68A71000FD1AF /* LaunchImage.png */; };
 		3170B29D20F69F9E000FD1AF /* ResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */; };
 		3170B29F20F6A294000FD1AF /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */; };
+		B177864F607BB89D1BF886BF /* Pods_Rety.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBFD54B94E05064C10B03B7 /* Pods_Rety.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		311066AF20F781BF00E8E125 /* LaunchImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LaunchImage.jpg; path = RAW/LaunchImage/LaunchImage.jpg; sourceTree = SOURCE_ROOT; };
+		311066B120F7C92800E8E125 /* AmazonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonService.swift; sourceTree = "<group>"; };
+		311066B320F7CAEC00E8E125 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		311066BB20F7DC5900E8E125 /* AWSSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSSignature.swift; sourceTree = "<group>"; };
 		3170B25F20F68621000FD1AF /* Rety.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rety.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3170B26220F68621000FD1AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3170B26720F68621000FD1AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,9 +64,11 @@
 		3170B29220F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
 		3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ProductClassifier.mlmodel; sourceTree = "<group>"; };
 		3170B29620F68854000FD1AF /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LICENSE; path = ../Areas/Context/ClassifyingImagesWithVisionAndCoreML/LICENSE; sourceTree = "<group>"; };
-		3170B29820F68A71000FD1AF /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchImage.png; path = Rety/LaunchImage.png; sourceTree = SOURCE_ROOT; };
 		3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewController.swift; sourceTree = "<group>"; };
 		3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		3E60C5CE2B9A73A7B4C99898 /* Pods-Rety.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rety.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rety/Pods-Rety.debug.xcconfig"; sourceTree = "<group>"; };
+		9BBFD54B94E05064C10B03B7 /* Pods_Rety.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rety.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD6DDF50A1BEC58A5E17F631 /* Pods-Rety.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rety.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rety/Pods-Rety.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B177864F607BB89D1BF886BF /* Pods_Rety.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +105,8 @@
 				3170B28120F68622000FD1AF /* RetyUITests */,
 				3170B26020F68621000FD1AF /* Products */,
 				3170B29620F68854000FD1AF /* LICENSE */,
+				755C7A9B2C5BAF2D5A167047 /* Pods */,
+				EE36E92EA31BE0C9E36E1676 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,11 +129,14 @@
 				3170B26620F68621000FD1AF /* Main.storyboard */,
 				3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */,
 				3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */,
+				311066B120F7C92800E8E125 /* AmazonService.swift */,
+				311066BB20F7DC5900E8E125 /* AWSSignature.swift */,
+				311066B320F7CAEC00E8E125 /* Product.swift */,
 				3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */,
 				3170B26920F68622000FD1AF /* Assets.xcassets */,
 				3170B26B20F68622000FD1AF /* LaunchScreen.storyboard */,
 				3170B26E20F68622000FD1AF /* Info.plist */,
-				3170B29820F68A71000FD1AF /* LaunchImage.png */,
+				311066AF20F781BF00E8E125 /* LaunchImage.jpg */,
 			);
 			path = Rety;
 			sourceTree = "<group>";
@@ -143,6 +159,23 @@
 			path = RetyUITests;
 			sourceTree = "<group>";
 		};
+		755C7A9B2C5BAF2D5A167047 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3E60C5CE2B9A73A7B4C99898 /* Pods-Rety.debug.xcconfig */,
+				BD6DDF50A1BEC58A5E17F631 /* Pods-Rety.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EE36E92EA31BE0C9E36E1676 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9BBFD54B94E05064C10B03B7 /* Pods_Rety.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,9 +183,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3170B28720F68622000FD1AF /* Build configuration list for PBXNativeTarget "Rety" */;
 			buildPhases = (
+				6D90722EE9C2C9BF679E40B5 /* [CP] Check Pods Manifest.lock */,
 				3170B25B20F68621000FD1AF /* Sources */,
 				3170B25C20F68621000FD1AF /* Frameworks */,
 				3170B25D20F68621000FD1AF /* Resources */,
+				22A76F00954A670CB791781C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -248,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3170B26D20F68622000FD1AF /* LaunchScreen.storyboard in Resources */,
+				311066B020F781C000E8E125 /* LaunchImage.jpg in Resources */,
 				3170B26A20F68622000FD1AF /* Assets.xcassets in Resources */,
 				3170B29720F68854000FD1AF /* LICENSE in Resources */,
 				3170B26820F68621000FD1AF /* Main.storyboard in Resources */,
@@ -265,19 +301,64 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3170B29920F68A71000FD1AF /* LaunchImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		22A76F00954A670CB791781C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Rety/Pods-Rety-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SHXMLParser/SHXMLParser.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SHXMLParser.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rety/Pods-Rety-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D90722EE9C2C9BF679E40B5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rety-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3170B25B20F68621000FD1AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				311066BC20F7DC5900E8E125 /* AWSSignature.swift in Sources */,
 				3170B29F20F6A294000FD1AF /* ResultsTableViewController.swift in Sources */,
+				311066B420F7CAEC00E8E125 /* Product.swift in Sources */,
 				3170B29320F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
+				311066B220F7C92800E8E125 /* AmazonService.swift in Sources */,
 				3170B26320F68621000FD1AF /* AppDelegate.swift in Sources */,
 				3170B29120F687BC000FD1AF /* ImageClassificationViewController.swift in Sources */,
 				3170B29520F687D2000FD1AF /* ProductClassifier.mlmodel in Sources */,
@@ -454,8 +535,10 @@
 		};
 		3170B28820F68622000FD1AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E60C5CE2B9A73A7B4C99898 /* Pods-Rety.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8C7KNTR4Z3;
 				INFOPLIST_FILE = Rety/Info.plist;
@@ -473,8 +556,10 @@
 		};
 		3170B28920F68622000FD1AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD6DDF50A1BEC58A5E17F631 /* Pods-Rety.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8C7KNTR4Z3;
 				INFOPLIST_FILE = Rety/Info.plist;

@@ -11,12 +11,21 @@ import UIKit
 class ResultsTableViewController: UITableViewController {
 
     var results: [String] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("Results", results)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "resultCell")
+        
+        AmazonService.getProductsByName(name: "Apple Watch")
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(closeTapped))
+    }
+    
+    @objc func closeTapped(sender: AnyObject) {
+        print("close")
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,4 +49,12 @@ class ResultsTableViewController: UITableViewController {
         return cell
     }
     
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Selected row", indexPath)
+        
+        let resultTableViewController = ResultTableViewController()
+        resultTableViewController.selected = results[indexPath.row]
+        
+        self.navigationController?.pushViewController(resultTableViewController, animated: false)
+    }
 }

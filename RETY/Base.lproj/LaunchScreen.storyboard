@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage.png" highlightedImage="LaunchImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="KBg-mt-tyX">
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="KBg-mt-tyX">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
@@ -41,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchImage.png" width="1125" height="2436"/>
+        <image name="LaunchImage.jpg" width="1125" height="2436"/>
     </resources>
 </document>

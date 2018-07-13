@@ -36,7 +36,7 @@ class ImageClassificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.activityIndicator.transform = CGAffineTransform(scaleX: 4, y: 4)
+        self.activityIndicator.transform = CGAffineTransform(scaleX: 3, y: 3)
         stopSpinner()
     }
     
@@ -52,7 +52,7 @@ class ImageClassificationViewController: UIViewController {
     
     /// - Tag: PerformRequests
     func updateClassifications(for image: UIImage) {
-        startSpinner()
+        self.startSpinner()
         
         let orientation = CGImagePropertyOrientation(image.imageOrientation)
         guard let ciImage = CIImage(image: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
@@ -106,7 +106,7 @@ class ImageClassificationViewController: UIViewController {
                 let nivationController = UINavigationController(rootViewController: resultsTableViewController)
                 nivationController.navigationBar.barStyle = UIBarStyle.blackTranslucent
                 
-                self.present(nivationController, animated: true)
+                self.present(nivationController, animated: false)
             }
         }
     }
@@ -122,14 +122,17 @@ class ImageClassificationViewController: UIViewController {
         
         let photoSourcePicker = UIAlertController()
         let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [unowned self] _ in
+            self.startSpinner()
             self.presentPhotoPicker(sourceType: .camera)
         }
         let choosePhoto = UIAlertAction(title: "Choose Photo", style: .default) { [unowned self] _ in
+            self.startSpinner()
             self.presentPhotoPicker(sourceType: .photoLibrary)
         }
         
         photoSourcePicker.addAction(takePhoto)
         photoSourcePicker.addAction(choosePhoto)
+        
         photoSourcePicker.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         photoSourcePicker.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
@@ -158,7 +161,11 @@ extension ImageClassificationViewController: UIImagePickerControllerDelegate, UI
         
         // We always expect `imagePickerController(:didFinishPickingMediaWithInfo:)` to supply the original image.
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        imageView.image = image
         updateClassifications(for: image)
+    }
+    
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.stopSpinner()
+        dismiss(animated: true, completion: nil)
     }
 }

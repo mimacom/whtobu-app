@@ -10,11 +10,25 @@ import UIKit
 
 class ResultTableViewController: UITableViewController  {
     
-    var fruits = ["Apple", "Apricot", "Banana", "Blueberry", "Cantaloupe", "Cherry",
+    var selected: String = ""
+    var detailInfo = ["Apple", "Apricot", "Banana", "Blueberry", "Cantaloupe", "Cherry",
                   "Clementine", "Coconut", "Cranberry", "Fig", "Grape", "Grapefruit",
                   "Kiwi fruit", "Lemon", "Lime", "Lychee", "Mandarine", "Mango",
                   "Melon", "Nectarine", "Olive", "Orange", "Papaya", "Peach",
                   "Pear", "Pineapple", "Raspberry", "Strawberry"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print("SElected", selected)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "LabelCell")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(closeTapped))
+    }
+    
+    @objc func closeTapped(sender: AnyObject) {
+        print("close")
+        dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - UITableViewDataSource
     
@@ -23,17 +37,13 @@ class ResultTableViewController: UITableViewController  {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fruits.count
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section \(section)"
+        return detailInfo.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
-        cell.textLabel?.text = fruits[indexPath.row]
+        cell.textLabel?.text = detailInfo[indexPath.row]
         
         return cell
     }
