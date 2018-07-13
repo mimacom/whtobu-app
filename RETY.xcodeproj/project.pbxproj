@@ -10,7 +10,6 @@
 		311066B020F781C000E8E125 /* LaunchImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 311066AF20F781BF00E8E125 /* LaunchImage.jpg */; };
 		311066B220F7C92800E8E125 /* AmazonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311066B120F7C92800E8E125 /* AmazonService.swift */; };
 		311066B420F7CAEC00E8E125 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311066B320F7CAEC00E8E125 /* Product.swift */; };
-		311066BC20F7DC5900E8E125 /* AWSSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311066BB20F7DC5900E8E125 /* AWSSignature.swift */; };
 		3170B26320F68621000FD1AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B26220F68621000FD1AF /* AppDelegate.swift */; };
 		3170B26820F68621000FD1AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3170B26620F68621000FD1AF /* Main.storyboard */; };
 		3170B26A20F68622000FD1AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3170B26920F68622000FD1AF /* Assets.xcassets */; };
@@ -47,7 +46,6 @@
 		311066AF20F781BF00E8E125 /* LaunchImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LaunchImage.jpg; path = RAW/LaunchImage/LaunchImage.jpg; sourceTree = SOURCE_ROOT; };
 		311066B120F7C92800E8E125 /* AmazonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonService.swift; sourceTree = "<group>"; };
 		311066B320F7CAEC00E8E125 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		311066BB20F7DC5900E8E125 /* AWSSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSSignature.swift; sourceTree = "<group>"; };
 		3170B25F20F68621000FD1AF /* Rety.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rety.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3170B26220F68621000FD1AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3170B26720F68621000FD1AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */,
 				3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */,
 				311066B120F7C92800E8E125 /* AmazonService.swift */,
-				311066BB20F7DC5900E8E125 /* AWSSignature.swift */,
 				311066B320F7CAEC00E8E125 /* Product.swift */,
 				3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */,
 				3170B26920F68622000FD1AF /* Assets.xcassets */,
@@ -314,15 +311,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Rety/Pods-Rety-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/SHXMLParser/SHXMLParser.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SHXMLParser.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -354,7 +347,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				311066BC20F7DC5900E8E125 /* AWSSignature.swift in Sources */,
 				3170B29F20F6A294000FD1AF /* ResultsTableViewController.swift in Sources */,
 				311066B420F7CAEC00E8E125 /* Product.swift in Sources */,
 				3170B29320F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,

@@ -1,24 +1,16 @@
 PODS:
   - Alamofire (4.7.2)
-  - AWSCore (2.6.18)
-  - SHXMLParser (1.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
-  - AWSCore
-  - SHXMLParser
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - AWSCore
-    - SHXMLParser
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  AWSCore: 5594f02730a821907d155ac28e96593d1caa6f64
-  SHXMLParser: 3e5ada336541b3e5b8d66046a14c2bf49742c62e
 
-PODFILE CHECKSUM: 15f10d47b94c55aa7bdb8a6a068712d669f1d06b
+PODFILE CHECKSUM: 6ddcb0f1afbb61c3618883f3cfe7d9167ceb4898
 
 COCOAPODS: 1.5.3
