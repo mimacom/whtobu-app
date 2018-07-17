@@ -100,11 +100,19 @@ class ImageClassificationViewController: UIViewController {
                 print("Classification:\n" + descriptions.joined(separator: "\n"))
                 self.stopSpinner()
                 
-                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let resultsTableViewController = storyBoard.instantiateViewController(withIdentifier: "ResultsTableViewController") as! ResultsTableViewController
-                
-          //      resultsTableViewController.results = descriptions
-                self.navigationController?.pushViewController(resultsTableViewController, animated: true)
+                OperationQueue.main.addOperation {
+                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let resultsTableViewController = storyBoard.instantiateViewController(withIdentifier: "ResultsTableViewController") as! ResultsTableViewController
+                    
+                    resultsTableViewController.results = descriptions
+                    
+                    let navationController = storyBoard.instantiateViewController(withIdentifier: "NavigationController") as! UINavigationController
+                    
+                    navationController.pushViewController(resultsTableViewController, animated: false)
+                    navationController.navigationBar.barStyle = UIBarStyle.blackTranslucent
+                    
+                    self.present(navationController, animated: false)
+                }
             }
         }
     }

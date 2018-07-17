@@ -20,7 +20,7 @@
 		3170B29320F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29220F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
 		3170B29520F687D2000FD1AF /* ProductClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */; };
 		3170B29720F68854000FD1AF /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3170B29620F68854000FD1AF /* LICENSE */; };
-		3170B29D20F69F9E000FD1AF /* ResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */; };
+		3170B29D20F69F9E000FD1AF /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29C20F69F9E000FD1AF /* ResultViewController.swift */; };
 		3170B29F20F6A294000FD1AF /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */; };
 		B177864F607BB89D1BF886BF /* Pods_Rety.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBFD54B94E05064C10B03B7 /* Pods_Rety.framework */; };
 /* End PBXBuildFile section */
@@ -62,7 +62,7 @@
 		3170B29220F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
 		3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ProductClassifier.mlmodel; sourceTree = "<group>"; };
 		3170B29620F68854000FD1AF /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LICENSE; path = ../Areas/Context/ClassifyingImagesWithVisionAndCoreML/LICENSE; sourceTree = "<group>"; };
-		3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewController.swift; sourceTree = "<group>"; };
+		3170B29C20F69F9E000FD1AF /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		3E60C5CE2B9A73A7B4C99898 /* Pods-Rety.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rety.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rety/Pods-Rety.debug.xcconfig"; sourceTree = "<group>"; };
 		9BBFD54B94E05064C10B03B7 /* Pods_Rety.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rety.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +125,7 @@
 				3170B29020F687BC000FD1AF /* ImageClassificationViewController.swift */,
 				3170B29220F687CC000FD1AF /* CGImagePropertyOrientation+UIImageOrientation.swift */,
 				3170B26620F68621000FD1AF /* Main.storyboard */,
-				3170B29C20F69F9E000FD1AF /* ResultTableViewController.swift */,
+				3170B29C20F69F9E000FD1AF /* ResultViewController.swift */,
 				3170B29E20F6A294000FD1AF /* ResultsTableViewController.swift */,
 				311066B120F7C92800E8E125 /* AmazonService.swift */,
 				3170B29420F687D2000FD1AF /* ProductClassifier.mlmodel */,
@@ -356,7 +356,7 @@
 				3170B26320F68621000FD1AF /* AppDelegate.swift in Sources */,
 				3170B29120F687BC000FD1AF /* ImageClassificationViewController.swift in Sources */,
 				3170B29520F687D2000FD1AF /* ProductClassifier.mlmodel in Sources */,
-				3170B29D20F69F9E000FD1AF /* ResultTableViewController.swift in Sources */,
+				3170B29D20F69F9E000FD1AF /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

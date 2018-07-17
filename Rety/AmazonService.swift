@@ -18,9 +18,12 @@ class AmazonService {
     
     static func getProductsByName(name: String, completionHandler: @escaping ([[String:AnyObject]]) -> Void) -> Void {
         
+        
         Alamofire.request(APIUrl, method: .post, parameters: [
-            "name": name
-        ]).responseJSON { response in
+            "keywords": "Watch",
+            "manufacturer": "Apple",
+            "searchIndex": "Electronics"
+        ], encoding: JSONEncoding.default).responseJSON { response in
 //            print("Request: \(String(describing: response.request))")   // original url request
 //            print("Response: \(String(describing: response.response))") // http url response
 //            print("Result: \(response.result)")                         // response serialization result
@@ -33,8 +36,10 @@ class AmazonService {
 //                print("Data: \(utf8Text)") // original server data as UTF8 string
 //            }
             
-            if ((response.result.value) != nil) {
+            if (response.response?.statusCode == 200 && (response.result.value) != nil) {
                 completionHandler(JSON(response.result.value!).arrayObject! as! [[String : AnyObject]])
+            } else {
+                completionHandler([]) // @todo add error handling
             }
         }
     }

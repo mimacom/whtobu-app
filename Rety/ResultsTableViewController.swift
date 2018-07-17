@@ -13,7 +13,7 @@ class ResultsTableViewController: UITableViewController {
 
     @IBOutlet var resultsTableView: UITableView!
     var amazonResults = [[String:AnyObject]]()
-    var results: [String] = ["Apple Watch", "Apple iPhone 7 Plus", "Apple iPhone 8"]
+    var results: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class ResultsTableViewController: UITableViewController {
     
     @objc func closeTapped(sender: AnyObject) {
         print("close")
-        dismiss(animated: true, completion: nil)
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - UITableViewDataSource
@@ -43,20 +43,10 @@ class ResultsTableViewController: UITableViewController {
         
         return cell!
     }
-  /*
-    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected row", indexPath)
-        
-        let resultTableViewController = ResultTableViewController()
-        resultTableViewController.selected = results[indexPath.row]
-        
-        self.navigationController?.pushViewController(resultTableViewController, animated: false)
-    } */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let resultTableViewController = storyboard.instantiateViewController(withIdentifier: "ResultTableViewController") as! ResultTableViewController
+        let resultTableViewController = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
         
         resultTableViewController.selected = results[indexPath.row]
         self.navigationController?.pushViewController(resultTableViewController, animated: true)
