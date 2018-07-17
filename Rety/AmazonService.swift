@@ -7,51 +7,35 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
 class AmazonService {
     
-    static let defaultSession = URLSession(configuration: .default)
-    static var dataTask: URLSessionDataTask?
+    static let APIUrl = "https://amazon-product-api.rety.io/"
     
-    static func getProductsByName(name: String) -> [Product] {
+    static let defaultSession = URLSession(configuration: .default)
+    
+    static func getProductsByName(name: String, completionHandler: @escaping ([[String:AnyObject]]) -> Void) -> Void {
         
-        dataTask?.cancel()
-        
-        let result: [Product] = []
-        
-       
-//        dataTask = defaultSession.dataTask(with: url!) { data, response, error in
-//            defer { self.dataTask = nil }
+        Alamofire.request(APIUrl, method: .post, parameters: [
+            "name": name
+        ]).responseJSON { response in
+//            print("Request: \(String(describing: response.request))")   // original url request
+//            print("Response: \(String(describing: response.response))") // http url response
+//            print("Result: \(response.result)")                         // response serialization result
 //
-//            if let error = error {
-//                print("DataTask error: " + error.localizedDescription + "\n")
-//            } else if let data = data,
-//                let response = response as? HTTPURLResponse,
-//                response.statusCode == 200 {
-//
-//                print("Data", data)
+//            if let json = response.result.value {
+//                print("JSON: \(json)") // serialized json response
 //            }
 //
-//            print("Response", response)
-//        }
-        
-        dataTask?.resume()
-        
-        // print("Items", items)
-        
-        return result
+//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                print("Data: \(utf8Text)") // original server data as UTF8 string
+//            }
+            
+            if ((response.result.value) != nil) {
+                completionHandler(JSON(response.result.value!).arrayObject! as! [[String : AnyObject]])
+            }
+        }
     }
-//
-//    static func createURLWithComponents(signature: [String:AnyObject]) -> URL? {
-//        var urlComponents = URLComponents(string: AmazonService.ProductAdvertisingApiUrl)
-//
-//        urlComponents?.queryItems = []
-//
-//        for (name, value) in signature {
-//            let encodedValue = String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-//            urlComponents?.queryItems?.append(URLQueryItem(name: name, value: encodedValue))
-//        }
-//
-//        return try! urlComponents?.asURL()
-//    }
 }
