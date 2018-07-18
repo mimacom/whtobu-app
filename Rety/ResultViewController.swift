@@ -11,27 +11,12 @@ import UIKit
 class ResultViewController: UIViewController  {
     
     var selected: String = ""
-    var detailInfo: [[String:AnyObject]] = []
+    var product: [String:AnyObject] = [:]
     
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var productName: UILabel!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var buyButton: UIButton!
-    
-    func stopSpinner() {
-//        self.scrollView.isHidden = false
-//        self.buyButton.isEnabled = true
-        self.activityIndicator.isHidden = true
-        self.activityIndicator.stopAnimating()
-    }
-    
-    func startSpinner() {
-    //        self.scrollView.isHidden = true
-//        self.buyButton.isEnabled = false
-        self.activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -39,13 +24,14 @@ class ResultViewController: UIViewController  {
         self.imageView.clipsToBounds = false
         self.productName.text = ""
         
-        self.activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-        startSpinner()
-        
         print("Selected", selected)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(closeTapped))
         
+        self.imageView.imageFromUrl(urlString: self.getLargeImageUrl())
+        self.productName.text = self.getProductname()
+        
+    /*
         AmazonService.getProductsByName(name: selected) {
             (items) in
             
@@ -56,7 +42,7 @@ class ResultViewController: UIViewController  {
             }
             
             self.activityIndicator.isHidden = true
-        }
+        } */
     }
     
     @IBAction func didTapBuyButton(sender: AnyObject) {
@@ -72,9 +58,9 @@ class ResultViewController: UIViewController  {
     
     func getProductname() -> String {
         
-        print("Data:", self.detailInfo)
+        print("Data:", self.product)
         
-        let itemAttributes = self.detailInfo[0]["ItemAttributes"] as! [[String: AnyObject]]
+        let itemAttributes = self.product["ItemAttributes"] as! [[String: AnyObject]]
         
         for (key, value) in itemAttributes[0] {
             print("Key:", key)
@@ -90,14 +76,14 @@ class ResultViewController: UIViewController  {
     
     func getBuyUrl() -> String {
         
-        print("Data:", self.detailInfo)
+        print("Data:", self.product)
         
-        let detailPageURL = self.detailInfo[0]["DetailPageURL"] as! [String]
+        let detailPageURL = self.product["DetailPageURL"] as! [String]
         return detailPageURL[0]
     }
     
     func getLargeImageUrl() -> String {
-        let smallImage = self.detailInfo[0]["LargeImage"] as! [[String: AnyObject]]
+        let smallImage = self.product["LargeImage"] as! [[String: AnyObject]]
         let urlItems = smallImage[0]
         var url: String? = nil
         

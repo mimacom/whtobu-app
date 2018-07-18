@@ -46,9 +46,9 @@ class ResultsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let resultTableViewController = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+        let containerViewController = storyboard.instantiateViewController(withIdentifier: "ContainerViewController") as! ContainerViewController
         
-        resultTableViewController.selected = results[indexPath.row]
-        self.navigationController?.pushViewController(resultTableViewController, animated: true)
+        containerViewController.selected = results[indexPath.row]
+        self.navigationController?.pushViewController(containerViewController, animated: true)
     }
 }
