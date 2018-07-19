@@ -41,10 +41,10 @@ class ContainerViewController: UIViewController {
         view.addSubview(controller.view)
         
         NSLayoutConstraint.activate([
-            controller.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            controller.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            controller.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+            controller.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            controller.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            controller.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
         
         controller.didMove(toParent: self)

@@ -11,7 +11,7 @@ import UIKit
 class PageViewController: UIPageViewController {
     
     var selected: String = ""
-    var products: [[String:AnyObject]] = []
+    var products: [[String:String]] = []
     var pageControl: UIPageControl!
     var activityIndicator: UIActivityIndicatorView!
     
@@ -70,7 +70,7 @@ class PageViewController: UIPageViewController {
         return controllers
     }()
     
-    private func newViewController(_ product: [String:AnyObject]) -> ResultViewController {
+    private func newViewController(_ product: [String:String]) -> ResultViewController {
         let controller = UIStoryboard(name: "Main", bundle: nil) .
             instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
         
